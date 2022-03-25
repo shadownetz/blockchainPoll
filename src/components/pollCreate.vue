@@ -56,22 +56,33 @@
 </template>
 
 <script>
-import {PollModel} from "@/models/models";
+import Poll from "../models/poll";
 
 export default {
     name: "pollCreate",
     data(){
         return {
-            poll: new PollModel()
+            poll: new Poll()
         }
     },
     methods: {
-      pollSubmit(){
-        console.log(this.poll)
+        initPoll(){
+            this.poll = new Poll();
+            this.poll.options.push("");
+            this.poll.createdBy = this.$store.getters['user/user'].id
+            // this.poll.voters.push(this.$store.getters['user/user'].id)
+        },
+      async pollSubmit(){
+          const response = await this.$store.dispatch('poll/add', this.poll);
+          if(!response.status){
+              alert(response.message)
+          }else{
+              this.initPoll();
+          }
       }
     },
     created() {
-        this.poll.options.push("")
+        this.initPoll();
     }
 }
 </script>

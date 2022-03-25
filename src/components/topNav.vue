@@ -11,7 +11,7 @@
 <!--                        <a class="nav-link active" aria-current="page" href="#">Blockchain Polls</a>-->
 <!--                    </li>-->
 <!--                </ul>-->
-                <form class="d-flex">
+                <form class="d-flex" v-if="$route.name !== 'Auth'">
                     <button class="btn btn-dark" @click="$emit('toggleForm')" type="button">+ Create Poll</button>
                 </form>
             </div>

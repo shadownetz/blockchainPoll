@@ -1,0 +1,62 @@
+<template>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-3" v-if="!poll.data.voters.includes(user.id)">
+                <img :src="poll.data.thumbnail" class="card-img-top" alt="poll image">
+                <div class="card-body">
+                    <h5 class="card-title">{{poll.data.question}}</h5>
+                    <p class="card-text">
+                        Created at {{poll.data.createdAt.toDate()}}
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" v-for="(option, idx) in poll.data.options" :key="'poll_d'+idx">
+                       {{option}}
+                        <span class="float-md-right">
+                            <button class="btn btn-sm btn-primary" @click="castVote(idx)">vote</button>
+                        </span>
+                    </li>
+                </ul>
+<!--                <div class="card-body">-->
+<!--                    <a href="#" class="card-link">Card link</a>-->
+<!--                    <a href="#" class="card-link">Another link</a>-->
+<!--                </div>-->
+            </div>
+            <div class="apx-chrt" v-else>
+                <h5>Apex chart of results</h5>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import {mapGetters} from 'vuex'
+
+export default {
+    name: "pollDetail",
+    props: ['poll'],
+    computed:{
+        ...mapGetters('user', ['user'])
+    },
+    methods: {
+       async castVote(selectedIdx){
+            const status = confirm("Proceed with selection?");
+            if(status){
+                const {poll} = this;
+                const response = await this.$store.dispatch('poll/vote', {
+                    poll, selectedIdx
+                });
+                if(response.status){
+                    alert("Operation successfully")
+                }else{
+                    alert(response.message);
+                }
+            }
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

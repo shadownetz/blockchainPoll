@@ -11,10 +11,10 @@
 
         <div class="d-flex">
             <div class="container poll-list">
-                <poll-list/>
+                <poll-list @selected="activePoll=$event"/>
             </div>
             <div class="container poll-details">
-                <h5>Detail</h5>
+                <poll-detail :poll="activePoll" v-if="activePoll"/>
             </div>
         </div>
     </div>
@@ -24,18 +24,21 @@
 import topNav from "@/components/topNav";
 import pollCreate from "@/components/pollCreate";
 import pollList from "@/components/pollList";
+import pollDetail from "../components/pollDetail";
 
 export default {
     name: 'Home',
     data(){
       return {
-          showForm: false
+          showForm: false,
+          activePoll: null
       }
     },
     components: {
         topNav,
         pollCreate,
-        pollList
+        pollList,
+        pollDetail
     }
 }
 </script>
@@ -43,5 +46,13 @@ export default {
 <style scoped>
 .poll-list{
     max-width: 400px;
+    height: 700px;
+    max-height: 700px;
+    overflow: auto;
+}
+.poll-details{
+    height: 700px;
+    max-height: 700px;
+    overflow: auto;
 }
 </style>
