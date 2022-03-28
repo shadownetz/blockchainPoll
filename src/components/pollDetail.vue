@@ -23,7 +23,7 @@
 <!--                </div>-->
             </div>
             <div class="apx-chrt" v-else>
-                <h5>Apex chart of results</h5>
+                <apexchart type="bar" :options="chart.options" :series="chart.series"></apexchart>
             </div>
         </div>
     </div>
@@ -35,6 +35,42 @@ import {mapGetters} from 'vuex'
 export default {
     name: "pollDetail",
     props: ['poll'],
+    data(){
+        return {
+            chart: {
+                options: {
+                    chart: {
+                        id: 'vuechart-example'
+                    },
+                    xaxis: {
+                        categories: this.poll.data.options
+                    }
+                },
+                series: [{
+                    name: 'series-1',
+                    data: Object.entries(this.poll.data.results).map(result=>result[1])
+                }]
+            }
+        }
+    },
+    watch: {
+        poll: function(newVal){
+            this.chart = {
+                options: {
+                    chart: {
+                        id: 'vuechart-example'
+                    },
+                    xaxis: {
+                        categories: newVal.data.options
+                    }
+                },
+                series: [{
+                    name: 'series-1',
+                    data: Object.entries(newVal.data.results).map(result=>result[1])
+                }]
+            }
+        }
+    },
     computed:{
         ...mapGetters('user', ['user'])
     },
@@ -53,10 +89,12 @@ export default {
                 }
             }
         }
-    }
+    },
 }
 </script>
 
 <style scoped>
-
+.apx-chrt{
+    height: 700px
+}
 </style>

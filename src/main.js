@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "./firebase/firebase";
+import VueApexCharts from 'vue-apexcharts'
+
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 
 Vue.config.productionTip = false
 

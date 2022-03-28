@@ -73,12 +73,17 @@ export default {
             // this.poll.voters.push(this.$store.getters['user/user'].id)
         },
       async pollSubmit(){
-          const response = await this.$store.dispatch('poll/add', this.poll);
-          if(!response.status){
-              alert(response.message)
-          }else{
-              this.initPoll();
-          }
+            if(this.poll.options){
+                this.poll.options.forEach((option, index)=>{
+                    this.poll.results[index] = 0;
+                })
+                const response = await this.$store.dispatch('poll/add', this.poll);
+                if(!response.status){
+                    alert(response.message)
+                }else{
+                    this.initPoll();
+                }
+            }
       }
     },
     created() {

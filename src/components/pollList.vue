@@ -13,7 +13,7 @@
                             {{poll.data.question}}
                         </p>
                         <div class="d-flex text-muted justify-content-between">
-                            <p>{{poll.data.results.length}} Votes</p>
+                            <p>{{Object.entries(poll.data.results).map(result=>result[1]).reduce((prev, curr)=>prev+curr, 0)}} Votes</p>
                             <p v-if="poll.data.voters.includes(user.id)">
                                 <span class="badge badge-success">voted</span>
                             </p>

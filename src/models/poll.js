@@ -4,7 +4,7 @@ class Poll{
     constructor(
         id='',
         question='',
-        results=[],
+        results={},
         options=[],
         thumbnail='')
     {

@@ -43,7 +43,11 @@ export default {
             const response = new CustomResponse();
             const user = rootGetters['user/user']
             try{
-                poll.data.results.push(selectedIdx);
+                if(poll.data.results[selectedIdx]){
+                    poll.data.results[selectedIdx]++;
+                }else{
+                    poll.data.results[selectedIdx] = 1
+                }
                 response.data = await updateDoc(doc(firestore, "polls", poll.id), {
                     results: poll.data.results,
                     voters: arrayUnion(user.id)
