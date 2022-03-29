@@ -77,7 +77,7 @@ export default {
                 this.poll.options.forEach((option, index)=>{
                     this.poll.results[index] = 0;
                 })
-                const response = await this.$store.dispatch('poll/add', this.poll);
+                const response = await this.$store.dispatch('pollB/add', this.poll);
                 if(!response.status){
                     alert(response.message)
                 }else{

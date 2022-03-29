@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import poll from "./modules/poll";
+import pollB from "./blockchain/poll";
 import auth from "./modules/auth";
 import user from "./modules/user";
 
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
   modules: {
     poll,
     auth,
-    user
+    user,
+    pollB
   }
 })
 

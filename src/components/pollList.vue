@@ -14,7 +14,7 @@
                         </p>
                         <div class="d-flex text-muted justify-content-between">
                             <p>{{Object.entries(poll.data.results).map(result=>result[1]).reduce((prev, curr)=>prev+curr, 0)}} Votes</p>
-                            <p v-if="poll.data.voters.includes(user.id)">
+                            <p v-if="poll.data.voters.includes(address)">
                                 <span class="badge badge-success">voted</span>
                             </p>
                         </div>
@@ -38,15 +38,17 @@ export default {
     },
     computed: {
       ...mapGetters({
-          poll_list: 'poll/polls',
-          user: 'user/user'
+          poll_list: 'pollB/polls',
+          user: 'user/user',
+          address: 'user/address'
       }),
     },
     methods: {
 
     },
     created() {
-        this.$store.dispatch('poll/fetch')
+        // this.$store.dispatch('poll/fetch')
+        this.$store.dispatch('pollB/fetch')
     }
 }
 </script>

@@ -5,7 +5,7 @@ import {
 } from 'firebase/auth'
 import {CustomResponse} from "../../utils/util";
 import User from "../../models/user";
-import {auth} from "../../firebase/firebase";
+import {auth} from "../../config/firebase";
 
 export default {
     namespaced: true,

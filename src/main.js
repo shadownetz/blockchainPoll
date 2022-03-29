@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import {onAuthStateChanged} from "firebase/auth";
-import {auth} from "./firebase/firebase";
+import {auth} from "./config/firebase";
 import VueApexCharts from 'vue-apexcharts'
 
 Vue.use(VueApexCharts)

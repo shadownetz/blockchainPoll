@@ -1,12 +1,12 @@
 <template>
     <div class="row">
         <div class="col-12">
-            <div class="card mb-3" v-if="!poll.data.voters.includes(user.id)">
+            <div class="card mb-3" v-if="!poll.data.voters.includes(address)">
                 <img :src="poll.data.thumbnail" class="card-img-top" alt="poll image">
                 <div class="card-body">
                     <h5 class="card-title">{{poll.data.question}}</h5>
                     <p class="card-text">
-                        Created at {{poll.data.createdAt.toDate()}}
+                        Created at {{toDate(poll.data.createdAt)}}
                     </p>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -72,14 +72,17 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('user', ['user'])
+        ...mapGetters({
+            user: 'user/user',
+            address: 'user/address'
+        })
     },
     methods: {
        async castVote(selectedIdx){
             const status = confirm("Proceed with selection?");
             if(status){
                 const {poll} = this;
-                const response = await this.$store.dispatch('poll/vote', {
+                const response = await this.$store.dispatch('pollB/vote', {
                     poll, selectedIdx
                 });
                 if(response.status){
@@ -88,6 +91,15 @@ export default {
                     alert(response.message);
                 }
             }
+        },
+        toDate(value){
+           if(typeof value === 'number'){
+               const _date = new Date(0);
+               _date.setUTCSeconds(value)
+               return _date
+           }else{
+               return value.toDate();
+           }
         }
     },
 }

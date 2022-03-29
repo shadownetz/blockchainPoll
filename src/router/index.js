@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import {auth} from "../firebase/firebase";
+import {auth} from "../config/firebase";
 
 Vue.use(VueRouter);
 

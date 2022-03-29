@@ -1,5 +1,5 @@
 import {CustomResponse} from "../../utils/util"
-import {firestore, pollStore} from "../../firebase/firebase";
+import {firestore, pollStore} from "../../config/firebase";
 import {
     addDoc,
     updateDoc,

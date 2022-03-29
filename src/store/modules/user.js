@@ -1,17 +1,22 @@
 import {CustomResponse} from "../../utils/util";
 import {addDoc, setDoc, doc, getDoc} from "firebase/firestore";
-import {firestore, userStore} from "../../firebase/firebase";
+import {firestore, userStore} from "../../config/firebase";
+import Web3Service from "../../config/web3Service";
+const _web3Service = new Web3Service();
 
 export default {
     namespaced: true,
     state: {
-        user: {id: '', data: {}}
+        user: {id: '', data: {}},
+        address: ""
     },
     getters: {
-        user: state => state.user
+        user: state => state.user,
+        address: state => state.address
     },
     mutations: {
-        setUser: (state, payload) => state.user = payload
+        setUser: (state, payload) => state.user = payload,
+        setAddress: (state, payload) => state.address = payload
     },
     actions: {
         async add(context, user){
@@ -39,7 +44,9 @@ export default {
                 commit('setUser', {
                     id: user.id,
                     data: user.data()
-                })
+                });
+                await _web3Service.getAccounts()
+                commit('setAddress', _web3Service.account)
             }catch (e){
                 response.onError(e.message)
             }
