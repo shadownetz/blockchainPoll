@@ -74,7 +74,7 @@ export default {
     computed:{
         ...mapGetters({
             user: 'user/user',
-            address: 'user/address'
+            address: 'userB/address'
         })
     },
     methods: {

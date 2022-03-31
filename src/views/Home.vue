@@ -39,6 +39,9 @@ export default {
         pollCreate,
         pollList,
         pollDetail
+    },
+    mounted() {
+        this.$store.dispatch('userB/initAddress');
     }
 }
 </script>

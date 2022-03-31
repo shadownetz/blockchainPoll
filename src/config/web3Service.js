@@ -4,7 +4,7 @@ const contractABI = require("./contractABI.json");
 class Web3Service{
     web3;
     contract;
-    contractAddress = "0x20f42834204f896f20f191446Ab461798aB4e6C3";
+    contractAddress = "0x1b3Ba8ca910f3c4e32EE66d681B2DBF614f6b960";
     accounts = []
 
     constructor() {
@@ -23,7 +23,11 @@ class Web3Service{
         return Web3.utils.fromAscii(value)
     }
     stringFromBytes32(value){
-        return Web3.utils.toAscii(value)
+        // eslint-disable-next-line no-control-regex
+        return Web3.utils.toAscii(value).replace(/\u0000/g, '')
+    }
+    checksumAddress(value){
+        return Web3.utils.toChecksumAddress(value)
     }
 
     async getAccounts(){
@@ -43,6 +47,17 @@ class Web3Service{
         return this.contract.methods[name](...params).call({
             from: this.account // user wallet address
         })
+    }
+
+    onEvents(eventName, callback){
+        return this.contract[eventName]()
+            .on('data', data=>{
+                const _payload = {
+                    event: data.event,
+                    payload: data.returnValues
+                }
+                callback(_payload);
+            })
     }
 
 }

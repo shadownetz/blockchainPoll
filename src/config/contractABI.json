@@ -1,18 +1,5 @@
 [
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "pollID",
-        "type": "uint256"
-      }
-    ],
-    "name": "pollCreated",
-    "type": "event"
-  },
-  {
     "inputs": [
       {
         "internalType": "string",
@@ -49,6 +36,37 @@
       }
     ],
     "name": "createUser",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "pollID",
+        "type": "uint256"
+      }
+    ],
+    "name": "pollCreated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_pollID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_optionIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "vote",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -152,24 +170,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_pollID",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_optionIndex",
-        "type": "uint256"
-      }
-    ],
-    "name": "vote",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

@@ -5,6 +5,7 @@ import poll from "./modules/poll";
 import pollB from "./blockchain/poll";
 import auth from "./modules/auth";
 import user from "./modules/user";
+import userB from "./blockchain/user";
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     poll,
     auth,
     user,
-    pollB
+    pollB,
+    userB
   }
 })
 

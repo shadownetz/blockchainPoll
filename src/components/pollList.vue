@@ -40,7 +40,7 @@ export default {
       ...mapGetters({
           poll_list: 'pollB/polls',
           user: 'user/user',
-          address: 'user/address'
+          address: 'userB/address'
       }),
     },
     methods: {

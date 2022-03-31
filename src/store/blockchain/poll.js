@@ -15,11 +15,12 @@ export default {
         setPolls: (state, payload) => state.polls = payload
     },
     actions: {
-        async fetch({commit}){
+        async fetch({commit, dispatch}){
             const response = new CustomResponse();
             try{
                 await _web3Service.getAccounts();
                 const pollsLength = await _web3Service.call('getTotalPolls');
+                console.log('length:', pollsLength)
                 const tmpArr = [];
                 for(let count = 0; count < pollsLength; count++){
                     const _poll = await _web3Service.call('getPoll', count);
@@ -37,6 +38,10 @@ export default {
                     })
                 }
                 commit('setPolls', tmpArr);
+                _web3Service.onEvents('pollCreated', (_payload)=>{
+                    console.log(_payload);
+                    dispatch('fetch');
+                })
             }catch (e){
                 response.onError(e.message)
             }
